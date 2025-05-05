@@ -1,0 +1,572 @@
+{
+    "hands-on-design": {
+    "metadata": {
+    "name": "hands-on-design",
+    "id": "48:3",
+    "fileName": "랜딩페이지",
+    "fileId": "2213057981412197085"
+    },
+    "type": {
+    "type": "FRAME",
+    "editorType": "figma"
+    },
+    "visuals": {
+    "fills": [
+    {
+    "blendMode": "NORMAL",
+    "type": "SOLID",
+    "color": {
+    "r": 0.22643332183361053,
+    "g": 0.8700252175331116,
+    "b": 0.3873313069343567,
+    "a": 1
+    }
+    }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "blendMode": "PASS_THROUGH",
+    "clipsContent": true,
+    "backgroundColor": {
+    "r": 0.22643332183361053,
+    "g": 0.8700252175331116,
+    "b": 0.3873313069343567,
+    "a": 1
+    },
+    "background": [
+    {
+    "blendMode": "NORMAL",
+    "type": "SOLID",
+    "color": {
+    "r": 0.22643332183361053,
+    "g": 0.8700252175331116,
+    "b": 0.3873313069343567,
+    "a": 1
+    }
+    }
+    ]
+    },
+    "layout": {
+    "layoutMode": "VERTICAL",
+    "primaryAxisSizingMode": "FIXED",
+    "counterAxisSizingMode": "FIXED",
+    "layoutSizingHorizontal": "FIXED",
+    "layoutSizingVertical": "FIXED",
+    "layoutWrap": "NO_WRAP",
+    "paddingLeft": 10,
+    "paddingRight": 10,
+    "paddingTop": 10,
+    "paddingBottom": 10,
+    "itemSpacing": 10,
+    "counterAxisAlignItems": "CENTER",
+    "primaryAxisAlignItems": "SPACE_BETWEEN",
+    "constraints": {
+    "vertical": "TOP",
+    "horizontal": "LEFT"
+    },
+    "absoluteBoundingBox": {
+    "x": -2232,
+    "y": 380,
+    "width": 393,
+    "height": 808
+    }
+    },
+    "dynamics": {
+    "effects": [],
+    "interactions": []
+    }
+    },
+    "hands-on-design/Nav": {
+    "metadata": {
+    "name": "Nav",
+    "id": "48:9",
+    "fileName": "랜딩페이지",
+    "fileId": "2213057981412197085"
+    },
+    "type": {
+    "type": "FRAME",
+    "editorType": "figma"
+    },
+    "visuals": {
+    "fills": [
+    {
+    "blendMode": "NORMAL",
+    "type": "SOLID",
+    "color": {
+    "r": 1,
+    "g": 0.8833333253860474,
+    "b": 0,
+    "a": 1
+    }
+    }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "blendMode": "PASS_THROUGH",
+    "clipsContent": true,
+    "backgroundColor": {
+    "r": 1,
+    "g": 0.8833333253860474,
+    "b": 0,
+    "a": 1
+    },
+    "background": [
+    {
+    "blendMode": "NORMAL",
+    "type": "SOLID",
+    "color": {
+    "r": 1,
+    "g": 0.8833333253860474,
+    "b": 0,
+    "a": 1
+    }
+    }
+    ]
+    },
+    "layout": {
+    "layoutMode": "VERTICAL",
+    "counterAxisSizingMode": "FIXED",
+    "layoutSizingHorizontal": "FILL",
+    "layoutSizingVertical": "HUG",
+    "layoutWrap": "NO_WRAP",
+    "paddingLeft": 25,
+    "paddingRight": 25,
+    "paddingTop": 25,
+    "paddingBottom": 25,
+    "itemSpacing": 10,
+    "counterAxisAlignItems": "CENTER",
+    "primaryAxisAlignItems": "CENTER",
+    "constraints": {
+    "vertical": "TOP",
+    "horizontal": "LEFT"
+    },
+    "absoluteBoundingBox": {
+    "x": -2222,
+    "y": 390,
+    "width": 373,
+    "height": 166
+    }
+    },
+    "dynamics": {
+    "effects": [],
+    "interactions": []
+    }
+    },
+    "hands-on-design/Nav/profile-img": {
+    "metadata": {
+    "name": "profile-img",
+    "id": "48:8",
+    "fileName": "랜딩페이지",
+    "fileId": "2213057981412197085"
+    },
+    "type": {
+    "type": "ELLIPSE",
+    "editorType": "figma"
+    },
+    "visuals": {
+    "fills": [
+    {
+    "blendMode": "NORMAL",
+    "type": "SOLID",
+    "color": {
+    "r": 0,
+    "g": 0.6166666746139526,
+    "b": 1,
+    "a": 1
+    }
+    }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "blendMode": "PASS_THROUGH"
+    },
+    "layout": {
+    "layoutSizingHorizontal": "FIXED",
+    "layoutSizingVertical": "FIXED",
+    "constraints": {
+    "vertical": "TOP",
+    "horizontal": "LEFT"
+    },
+    "absoluteBoundingBox": {
+    "x": -2067,
+    "y": 415,
+    "width": 63,
+    "height": 76
+    }
+    },
+    "dynamics": {
+    "effects": [],
+    "interactions": []
+    }
+    },
+    "hands-on-design/Nav/user-name": {
+    "metadata": {
+    "name": "user-name",
+    "id": "48:10",
+    "fileName": "랜딩페이지",
+    "fileId": "2213057981412197085"
+    },
+    "type": {
+    "type": "TEXT",
+    "editorType": "figma"
+    },
+    "visuals": {
+    "fills": [
+    {
+    "blendMode": "NORMAL",
+    "type": "SOLID",
+    "color": {
+    "r": 0,
+    "g": 0,
+    "b": 0,
+    "a": 1
+    }
+    }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "blendMode": "PASS_THROUGH"
+    },
+    "layout": {
+    "layoutSizingHorizontal": "HUG",
+    "layoutSizingVertical": "HUG",
+    "constraints": {
+    "vertical": "TOP",
+    "horizontal": "LEFT"
+    },
+    "absoluteBoundingBox": {
+    "x": -2058.5,
+    "y": 501,
+    "width": 46,
+    "height": 30
+    }
+    },
+    "dynamics": {
+    "effects": [],
+    "interactions": []
+    }
+    },
+    "hands-on-design/Hero": {
+    "metadata": {
+    "name": "Hero",
+    "id": "48:11",
+    "fileName": "랜딩페이지",
+    "fileId": "2213057981412197085"
+    },
+    "type": {
+    "type": "FRAME",
+    "editorType": "figma"
+    },
+    "visuals": {
+    "fills": [
+    {
+    "blendMode": "NORMAL",
+    "type": "SOLID",
+    "color": {
+    "r": 1,
+    "g": 0,
+    "b": 0.9666666388511658,
+    "a": 1
+    }
+    }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "blendMode": "PASS_THROUGH",
+    "clipsContent": false,
+    "backgroundColor": {
+    "r": 1,
+    "g": 0,
+    "b": 0.9666666388511658,
+    "a": 1
+    },
+    "background": [
+    {
+    "blendMode": "NORMAL",
+    "type": "SOLID",
+    "color": {
+    "r": 1,
+    "g": 0,
+    "b": 0.9666666388511658,
+    "a": 1
+    }
+    }
+    ]
+    },
+    "layout": {
+    "layoutMode": "HORIZONTAL",
+    "primaryAxisSizingMode": "FIXED",
+    "layoutSizingHorizontal": "FILL",
+    "layoutSizingVertical": "HUG",
+    "layoutWrap": "NO_WRAP",
+    "paddingLeft": 30,
+    "paddingRight": 30,
+    "paddingTop": 30,
+    "paddingBottom": 30,
+    "itemSpacing": 10,
+    "counterAxisAlignItems": "CENTER",
+    "primaryAxisAlignItems": "CENTER",
+    "constraints": {
+    "vertical": "TOP",
+    "horizontal": "LEFT"
+    },
+    "absoluteBoundingBox": {
+    "x": -2222,
+    "y": 561.3333129882812,
+    "width": 373,
+    "height": 242
+    }
+    },
+    "dynamics": {
+    "effects": [],
+    "interactions": []
+    }
+    },
+    "hands-on-design/Hero/Rectangle 2": {
+    "metadata": {
+    "name": "Rectangle 2",
+    "id": "48:5",
+    "fileName": "랜딩페이지",
+    "fileId": "2213057981412197085"
+    },
+    "type": {
+    "type": "RECTANGLE",
+    "editorType": "figma"
+    },
+    "visuals": {
+    "fills": [
+    {
+    "blendMode": "NORMAL",
+    "type": "SOLID",
+    "color": {
+    "r": 0.8509804010391235,
+    "g": 0.8509804010391235,
+    "b": 0.8509804010391235,
+    "a": 1
+    }
+    }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "blendMode": "PASS_THROUGH"
+    },
+    "layout": {
+    "layoutSizingHorizontal": "FIXED",
+    "layoutSizingVertical": "FIXED",
+    "constraints": {
+    "vertical": "TOP",
+    "horizontal": "LEFT"
+    },
+    "absoluteBoundingBox": {
+    "x": -2117.5,
+    "y": 591.3333129882812,
+    "width": 164,
+    "height": 182
+    }
+    },
+    "dynamics": {
+    "effects": [],
+    "interactions": []
+    }
+    },
+    "hands-on-design/Main": {
+    "metadata": {
+    "name": "Main",
+    "id": "48:12",
+    "fileName": "랜딩페이지",
+    "fileId": "2213057981412197085"
+    },
+    "type": {
+    "type": "FRAME",
+    "editorType": "figma"
+    },
+    "visuals": {
+    "fills": [],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "blendMode": "PASS_THROUGH",
+    "clipsContent": false,
+    "backgroundColor": {
+    "r": 0,
+    "g": 0,
+    "b": 0,
+    "a": 0
+    },
+    "background": []
+    },
+    "layout": {
+    "layoutMode": "HORIZONTAL",
+    "layoutSizingHorizontal": "HUG",
+    "layoutSizingVertical": "HUG",
+    "layoutWrap": "NO_WRAP",
+    "itemSpacing": 10,
+    "counterAxisAlignItems": "CENTER",
+    "constraints": {
+    "vertical": "TOP",
+    "horizontal": "LEFT"
+    },
+    "absoluteBoundingBox": {
+    "x": -2117.5,
+    "y": 808.6666259765625,
+    "width": 164,
+    "height": 182
+    }
+    },
+    "dynamics": {
+    "effects": [],
+    "interactions": []
+    }
+    },
+    "hands-on-design/Main/Rectangle 3": {
+    "metadata": {
+    "name": "Rectangle 3",
+    "id": "48:6",
+    "fileName": "랜딩페이지",
+    "fileId": "2213057981412197085"
+    },
+    "type": {
+    "type": "RECTANGLE",
+    "editorType": "figma"
+    },
+    "visuals": {
+    "fills": [
+    {
+    "blendMode": "NORMAL",
+    "type": "SOLID",
+    "color": {
+    "r": 0.8509804010391235,
+    "g": 0.8509804010391235,
+    "b": 0.8509804010391235,
+    "a": 1
+    }
+    }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "blendMode": "PASS_THROUGH"
+    },
+    "layout": {
+    "layoutSizingHorizontal": "FIXED",
+    "layoutSizingVertical": "FIXED",
+    "constraints": {
+    "vertical": "TOP",
+    "horizontal": "LEFT"
+    },
+    "absoluteBoundingBox": {
+    "x": -2117.5,
+    "y": 808.6666259765625,
+    "width": 164,
+    "height": 182
+    }
+    },
+    "dynamics": {
+    "effects": [],
+    "interactions": []
+    }
+    },
+    "hands-on-design/Footer": {
+    "metadata": {
+    "name": "Footer",
+    "id": "48:13",
+    "fileName": "랜딩페이지",
+    "fileId": "2213057981412197085"
+    },
+    "type": {
+    "type": "FRAME",
+    "editorType": "figma"
+    },
+    "visuals": {
+    "fills": [],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "blendMode": "PASS_THROUGH",
+    "clipsContent": false,
+    "backgroundColor": {
+    "r": 0,
+    "g": 0,
+    "b": 0,
+    "a": 0
+    },
+    "background": []
+    },
+    "layout": {
+    "layoutMode": "HORIZONTAL",
+    "layoutSizingHorizontal": "HUG",
+    "layoutSizingVertical": "HUG",
+    "layoutWrap": "NO_WRAP",
+    "itemSpacing": 10,
+    "counterAxisAlignItems": "CENTER",
+    "constraints": {
+    "vertical": "TOP",
+    "horizontal": "LEFT"
+    },
+    "absoluteBoundingBox": {
+    "x": -2117.5,
+    "y": 996,
+    "width": 164,
+    "height": 182
+    }
+    },
+    "dynamics": {
+    "effects": [],
+    "interactions": []
+    }
+    },
+    "hands-on-design/Footer/Rectangle 4": {
+    "metadata": {
+    "name": "Rectangle 4",
+    "id": "48:7",
+    "fileName": "랜딩페이지",
+    "fileId": "2213057981412197085"
+    },
+    "type": {
+    "type": "RECTANGLE",
+    "editorType": "figma"
+    },
+    "visuals": {
+    "fills": [
+    {
+    "blendMode": "NORMAL",
+    "type": "SOLID",
+    "color": {
+    "r": 0.8509804010391235,
+    "g": 0.8509804010391235,
+    "b": 0.8509804010391235,
+    "a": 1
+    }
+    }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "blendMode": "PASS_THROUGH"
+    },
+    "layout": {
+    "layoutSizingHorizontal": "FIXED",
+    "layoutSizingVertical": "FIXED",
+    "constraints": {
+    "vertical": "TOP",
+    "horizontal": "LEFT"
+    },
+    "absoluteBoundingBox": {
+    "x": -2117.5,
+    "y": 996,
+    "width": 164,
+    "height": 182
+    }
+    },
+    "dynamics": {
+    "effects": [],
+    "interactions": []
+    }
+    }
+    }
