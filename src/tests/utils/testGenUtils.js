@@ -41,12 +41,22 @@ function kebabToPascalCase(str) {
   return str.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
 }
 
-// Function to extract necessary styles from design tokens for a specific frame
-// Accepts a flag for root-specific styles (like w-screen, h-screen)
-function extractStylesFromTokens(tokens, frameKey, isRoot = false) {
-    const frameData = tokens[frameKey];
+/**
+ * Extracts necessary styles from design tokens for a specific frame.
+ * 
+ * @param {Object} frameData - The design token data object for the specific frame.
+ * @param {Object} options - Optional configuration flags.
+ * @param {boolean} [options.isRoot=false] - Whether to apply root-specific styles (e.g., w-screen).
+ * @param {boolean} [options.includeBackground=true] - Whether to include the background class.
+ * @returns {Object} - An object containing the list of Tailwind classes.
+ */
+function extractStylesFromTokens(frameData, options = {}) {
+    // Default options
+    const { isRoot = false, includeBackground = true } = options;
+
     if (!frameData) {
-        throw new Error(`Frame key '${frameKey}' not found in design tokens.`);
+        // This check might be redundant if caller ensures frameData exists, but good for safety
+        throw new Error('frameData must be provided to extractStylesFromTokens.');
     }
 
     const visuals = frameData.visuals || {};
@@ -91,12 +101,13 @@ function extractStylesFromTokens(tokens, frameKey, isRoot = false) {
     const plClass = paddingLeft > 0 ? `pl-[${paddingLeft}px]` : '';
     const prClass = paddingRight > 0 ? `pr-[${paddingRight}px]` : '';
     const gapClass = itemSpacing > 0 ? `gap-[${itemSpacing}px]` : '';
-    const bgClass = getBgClass(backgroundColor);
+    // Include background class only if the option is true
+    const bgClass = includeBackground ? getBgClass(backgroundColor) : '';
     const widthClass = width !== undefined && !isRoot ? `w-[${width}px]` : '';
     const heightClass = height !== undefined && !isRoot ? `h-[${height}px]` : '';
 
     // Combine all classes
-    let tailwindClasses = [
+    let classList = [
         flexOrDisplay, flexDir,
         justifyContent, alignItems,
         gapClass,
@@ -108,19 +119,44 @@ function extractStylesFromTokens(tokens, frameKey, isRoot = false) {
 
     // Add root-specific classes if applicable
     if (isRoot) {
-        tailwindClasses.push('w-screen', 'h-screen');
+        classList.push('w-screen', 'h-screen');
     }
 
     // Filter out empty strings
-    tailwindClasses = tailwindClasses.filter(Boolean);
+    classList = classList.filter(Boolean);
 
     // Return only the classes; component name should be handled separately
-    return { tailwindClasses };
+    return { classList };
+}
+
+/**
+ * Returns a visually distinct Tailwind background class for debugging purposes.
+ * Assigns colors based on the frame name.
+ * @param {string} frameName - The name of the layout frame (e.g., 'Nav', 'Hero').
+ * @returns {string} - A Tailwind background color class (e.g., 'bg-red-200').
+ */
+function getDebugBgClass(frameName) {
+  // Simple mapping for known frames. Add more as needed.
+  const name = frameName.toLowerCase();
+  switch (name) {
+    case 'nav':
+      return 'bg-red-200';
+    case 'hero':
+      return 'bg-blue-200';
+    case 'main':
+      return 'bg-green-200';
+    case 'footer':
+      return 'bg-yellow-200';
+    default:
+      // Fallback for unexpected frame names
+      return 'bg-gray-200';
+  }
 }
 
 module.exports = {
-    figmaColorToCss,
-    getBgClass,
-    kebabToPascalCase,
-    extractStylesFromTokens,
+  figmaColorToCss,
+  getBgClass,
+  kebabToPascalCase,
+  extractStylesFromTokens,
+  getDebugBgClass
 };

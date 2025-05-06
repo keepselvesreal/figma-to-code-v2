@@ -19,7 +19,10 @@ describe('Footer Layout Frame', () => {
     // Verify Tailwind classes using arbitrary values
     // Note: Class comparison might be brittle if classes are dynamically added/removed.
     // Consider testing computed styles for more robustness if needed.
-    expect(layoutElement).toHaveClass('flex', 'flex-row', 'items-center', 'gap-[10px]', 'w-[164px]', 'h-[182px]', 'bg-transparent');
+    expect(layoutElement).toHaveClass('flex', 'flex-row', 'items-center', 'gap-[10px]', 'w-[164px]', 'h-[182px]');
+
+    // Verify frame name is rendered inside
+    expect(layoutElement).toHaveTextContent('Footer');
 
     // TODO: Add more specific tests? (e.g., children count, specific attributes)
   });

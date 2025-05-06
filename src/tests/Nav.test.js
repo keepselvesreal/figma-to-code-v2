@@ -19,7 +19,10 @@ describe('Nav Layout Frame', () => {
     // Verify Tailwind classes using arbitrary values
     // Note: Class comparison might be brittle if classes are dynamically added/removed.
     // Consider testing computed styles for more robustness if needed.
-    expect(layoutElement).toHaveClass('flex', 'flex-col', 'justify-center', 'items-center', 'gap-[10px]', 'pt-[25px]', 'pb-[25px]', 'pl-[25px]', 'pr-[25px]', 'w-[373px]', 'h-[166px]', 'overflow-hidden', 'bg-[#ffe100]');
+    expect(layoutElement).toHaveClass('flex', 'flex-col', 'justify-center', 'items-center', 'gap-[10px]', 'pt-[25px]', 'pb-[25px]', 'pl-[25px]', 'pr-[25px]', 'w-[373px]', 'h-[166px]', 'overflow-hidden');
+
+    // Verify frame name is rendered inside
+    expect(layoutElement).toHaveTextContent('Nav');
 
     // TODO: Add more specific tests? (e.g., children count, specific attributes)
   });

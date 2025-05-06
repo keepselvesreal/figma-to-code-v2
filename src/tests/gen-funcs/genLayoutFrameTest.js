@@ -21,20 +21,20 @@ function genLayoutFrameTest(designTokensPath, frameKey) {
     const designTokensRaw = fs.readFileSync(designTokensPath, 'utf8');
     const designTokens = JSON.parse(designTokensRaw);
 
-    if (!designTokens[frameKey]) {
-      throw new Error(`Frame key '${frameKey}' not found in the design tokens.`);
+    const frameData = designTokens[frameKey];
+    if (!frameData) {
+      throw new Error(`Frame key '${frameKey}' not found in design tokens.`);
     }
 
     // Get component name using the utility from tokenUtils
     const kebabComponentName = getNameFromTokenKey(frameKey);
     const pascalComponentName = kebabToPascalCase(kebabComponentName);
 
-    // Extract Tailwind classes using the utility from testGenUtils, isRoot = false
-    const { tailwindClasses } = extractStylesFromTokens(designTokens, frameKey, false);
+    // Extract styles, excluding background for layout verification phase
+    // Pass frameData directly and options object
+    const { classList } = extractStylesFromTokens(frameData, { includeBackground: false });
     const testId = kebabComponentName; // Use kebab-case name for test ID
-
-    // Format Tailwind classes for the test assertion
-    const formattedClasses = tailwindClasses.map(cls => `'${cls}'`).join(', ');
+    const formattedClasses = classList.map(cls => `'${cls}'`).join(', ');
 
     // Generate the test file content
     // Assumes the component will be located in src/components/
@@ -60,6 +60,9 @@ describe('${pascalComponentName} Layout Frame', () => {
     // Note: Class comparison might be brittle if classes are dynamically added/removed.
     // Consider testing computed styles for more robustness if needed.
     expect(layoutElement).toHaveClass(${formattedClasses});
+
+    // Verify frame name is rendered inside
+    expect(layoutElement).toHaveTextContent('${pascalComponentName}');
 
     // TODO: Add more specific tests? (e.g., children count, specific attributes)
   });
