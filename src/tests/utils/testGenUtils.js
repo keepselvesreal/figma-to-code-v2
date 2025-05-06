@@ -63,6 +63,10 @@ function extractStylesFromTokens(frameData, options = {}) {
     const layout = frameData.layout || {};
     const boundingBox = layout.absoluteBoundingBox || {};
 
+    // Extract layout sizing modes
+    const layoutSizingHorizontal = layout.layoutSizingHorizontal;
+    const layoutSizingVertical = layout.layoutSizingVertical;
+
     // Extract and convert values
     const backgroundColor = visuals.backgroundColor || (visuals.fills && visuals.fills[0]?.type === 'SOLID' ? visuals.fills[0].color : undefined);
     const paddingTop = layout.paddingTop ?? 0;
@@ -101,10 +105,28 @@ function extractStylesFromTokens(frameData, options = {}) {
     const plClass = paddingLeft > 0 ? `pl-[${paddingLeft}px]` : '';
     const prClass = paddingRight > 0 ? `pr-[${paddingRight}px]` : '';
     const gapClass = itemSpacing > 0 ? `gap-[${itemSpacing}px]` : '';
-    // Include background class only if the option is true
+
+    // Determine width class based on layoutSizingHorizontal
+    let widthClass = '';
+    if (isRoot) {
+      widthClass = 'w-screen'; // Root always takes full screen width
+    } else if (layoutSizingHorizontal === 'FILL') {
+      widthClass = 'w-full';
+    } else if (layoutSizingHorizontal === 'FIXED' && width !== undefined) {
+      widthClass = `w-[${width}px]`;
+    } // 'HUG' doesn't add a specific width class
+
+    // Determine height class based on layoutSizingVertical
+    let heightClass = '';
+    if (isRoot) {
+      heightClass = 'h-screen'; // Root always takes full screen height
+    } else if (layoutSizingVertical === 'FILL') {
+      heightClass = 'h-full';
+    } else if (layoutSizingVertical === 'FIXED' && height !== undefined) {
+      heightClass = `h-[${height}px]`;
+    } // 'HUG' doesn't add a specific height class
+
     const bgClass = includeBackground ? getBgClass(backgroundColor) : '';
-    const widthClass = width !== undefined && !isRoot ? `w-[${width}px]` : '';
-    const heightClass = height !== undefined && !isRoot ? `h-[${height}px]` : '';
 
     // Combine all classes
     let classList = [

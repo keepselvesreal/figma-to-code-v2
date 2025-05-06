@@ -22,7 +22,8 @@ const HandsOnDesign: React.FC<Props> = ({ children }) => {
     >
       {/* Nav layout frame (Apply debug BG and add name) */}
       <div
-        className={`flex flex-col justify-center items-center gap-[10px] pt-[25px] pb-[25px] pl-[25px] pr-[25px] w-[373px] h-[166px] overflow-hidden ${getDebugBgClass(navName)}`}
+        // Replace w-[373px] with w-full based on design token layoutSizingHorizontal: FILL
+        className={`flex flex-col justify-center items-center gap-[10px] pt-[25px] pb-[25px] pl-[25px] pr-[25px] w-full h-[166px] overflow-hidden ${getDebugBgClass(navName)}`}
         data-testid={navName}
       >
         {navName} {/* Add frame name */}
@@ -30,7 +31,8 @@ const HandsOnDesign: React.FC<Props> = ({ children }) => {
 
       {/* Hero layout frame (Apply debug BG and add name) */}
       <div
-        className={`flex flex-row justify-center items-center gap-[10px] pt-[30px] pb-[30px] pl-[30px] pr-[30px] w-[373px] h-[242px] ${getDebugBgClass(heroName)}`}
+        // Replace w-[373px] with w-full based on design token layoutSizingHorizontal: FILL
+        className={`flex flex-row justify-center items-center gap-[10px] pt-[30px] pb-[30px] pl-[30px] pr-[30px] w-full h-[242px] ${getDebugBgClass(heroName)}`}
         data-testid={heroName}
       >
          {heroName} {/* Add frame name */}

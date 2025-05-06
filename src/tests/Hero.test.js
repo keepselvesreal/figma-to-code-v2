@@ -19,7 +19,7 @@ describe('Hero Layout Frame', () => {
     // Verify Tailwind classes using arbitrary values
     // Note: Class comparison might be brittle if classes are dynamically added/removed.
     // Consider testing computed styles for more robustness if needed.
-    expect(layoutElement).toHaveClass('flex', 'flex-row', 'justify-center', 'items-center', 'gap-[10px]', 'pt-[30px]', 'pb-[30px]', 'pl-[30px]', 'pr-[30px]', 'w-[373px]', 'h-[242px]');
+    expect(layoutElement).toHaveClass('flex', 'flex-row', 'justify-center', 'items-center', 'gap-[10px]', 'pt-[30px]', 'pb-[30px]', 'pl-[30px]', 'pr-[30px]', 'w-full');
 
     // Verify frame name is rendered inside
     expect(layoutElement).toHaveTextContent('Hero');
