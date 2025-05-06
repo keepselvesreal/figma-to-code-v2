@@ -13,9 +13,11 @@ const {
  * Generates Jest test code for the root frame component based on design tokens.
  * Reads tokens from a JSON file.
  * @param {string} designTokensPath - Path to the design tokens JSON file.
+ * @param {string} outputDir - Absolute path of the directory where the generated test file will be located.
+ * @param {string} componentDirRelative - Relative path to the component directory from the test file location.
  * @returns {string} - The generated test code as a string.
  */
-function genRootFrameTest(designTokensPath) {
+function genRootFrameTest(designTokensPath, outputDir, componentDirRelative) {
   try {
     // Read and parse the design tokens JSON file
     const designTokensRaw = fs.readFileSync(designTokensPath, 'utf8');
@@ -24,7 +26,7 @@ function genRootFrameTest(designTokensPath) {
     // Find the root frame key (e.g., "hands-on-design")
     const rootFrameKey = findRootFrameKey(designTokens);
     if (!rootFrameKey) {
-      throw new Error('Could not find the root frame key in the design tokens.');
+      throw new Error('디자인 토큰에서 루트 프레임 키를 찾을 수 없습니다.');
     }
 
     // Get component name using the utility from tokenUtils
@@ -32,11 +34,15 @@ function genRootFrameTest(designTokensPath) {
     const pascalComponentName = kebabToPascalCase(kebabComponentName);
 
     // Extract Tailwind classes using the utility from testGenUtils, passing isRoot = true
-    const { tailwindClasses } = extractStylesFromTokens(designTokens, rootFrameKey, true);
+    const { classList: maybeTailwindClasses } = extractStylesFromTokens(designTokens[rootFrameKey], { isRoot: true });
+    const tailwindClasses = Array.isArray(maybeTailwindClasses) ? maybeTailwindClasses : []; // Ensure it's an array
     const testId = kebabComponentName; // Use kebab-case name for test ID
 
     // Format Tailwind classes for the test assertion
     const formattedClasses = tailwindClasses.map(cls => `'${cls}'`).join(', ');
+
+    // Calculate component import path (using relative path from outputDir)
+    const componentImportPath = path.join(componentDirRelative, pascalComponentName).replace(/\\/g, '/'); // Use \\ for Windows path separator and then replace with /
 
     // Generate the test file content
     const testCode = `// ${kebabComponentName}.test.js
@@ -44,7 +50,7 @@ function genRootFrameTest(designTokensPath) {
 // Do not edit manually, regenerate if design tokens change.
 
 import { render, screen } from '@testing-library/react';
-import ${pascalComponentName} from '../../components/${pascalComponentName}'; // Adjusted path to components dir
+import ${pascalComponentName} from '${componentImportPath}'; // Use dynamically generated path
 
 describe('${pascalComponentName} Component', () => {
   it('should have the correct Tailwind classes based on design tokens', () => {
@@ -64,38 +70,7 @@ describe('${pascalComponentName} Component', () => {
     return testCode;
 
   } catch (error) {
-    console.error("Error generating test code:", error);
     throw error; // Re-throw the error to indicate failure
-  }
-}
-
-// Example Usage (if run directly):
-if (require.main === module) {
-  const tokensPath = path.join(__dirname, '..', '..', 'data', 'design-tokens.json');
-  // Determine the output file name based on the original kebab-case name
-  let rootKey = 'default-root-key'; // Provide a default or handle error
-  let kebabName = 'default-component-name';
-  try {
-      const tokens = JSON.parse(fs.readFileSync(tokensPath, 'utf8'));
-      rootKey = findRootFrameKey(tokens);
-      if (!rootKey) throw new Error('Root frame key not found for naming.');
-      kebabName = getNameFromTokenKey(rootKey);
-  } catch (error) {
-      console.error(`Error determining output file name: ${error.message}`);
-      // Decide if you want to exit or use defaults
-      process.exit(1);
-  }
-
-  const outputFileName = `${kebabName}.test.js`;
-  const outputPath = path.join(__dirname, '..', outputFileName);
-
-  try {
-    const generatedCode = genRootFrameTest(tokensPath);
-    fs.writeFileSync(outputPath, generatedCode); // Write to src/tests directory
-    console.log(`Test file generated successfully: ${outputPath}`);
-  } catch (error) {
-    console.error(`Failed to generate test file: ${error.message}`);
-    process.exit(1);
   }
 }
 

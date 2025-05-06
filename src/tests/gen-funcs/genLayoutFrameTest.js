@@ -13,9 +13,11 @@ const {
  * Reads tokens from a JSON file and targets a specific frame key.
  * @param {string} designTokensPath - Path to the design tokens JSON file.
  * @param {string} frameKey - The specific key for the layout frame (e.g., "hands-on-design/Nav").
+ * @param {string} rootComponentName - The name of the root component to render (e.g., 'HandsOnDesign').
+ * @param {string} rootComponentPath - The relative path to the root component from the generated test file.
  * @returns {string} - The generated test code as a string.
  */
-function genLayoutFrameTest(designTokensPath, frameKey) {
+function genLayoutFrameTest(designTokensPath, frameKey, rootComponentName, rootComponentPath) { 
   try {
     // Read and parse the design tokens JSON file
     const designTokensRaw = fs.readFileSync(designTokensPath, 'utf8');
@@ -31,33 +33,33 @@ function genLayoutFrameTest(designTokensPath, frameKey) {
     const pascalComponentName = kebabToPascalCase(kebabComponentName);
 
     // Extract styles: get core layout classes (no bg) and the actual bg class separately
-    const { classList: coreLayoutClasses, actualBgClass } = extractStylesFromTokens(frameData, { includeBackground: false });
+    const { classList: coreLayoutClasses, actualBgClass } = extractStylesFromTokens(frameData, { isRoot: false, includeBackground: false });
     const formattedCoreClasses = coreLayoutClasses.map(cls => `'${cls}'`).join(', ');
+    const testId = kebabComponentName; 
+    
+    // Construct the correct component import path
+    const componentImportPath = path.join(rootComponentPath, rootComponentName).replace(/\\/g, '/');
 
     // Generate the test code string with two test cases
     const testCode = `
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-// Assuming HandsOnDesign is the component containing these frames
-// Adjust the import path if necessary
-import HandsOnDesign from '../components/HandsOnDesign'; 
+import ${rootComponentName} from '${componentImportPath}'; 
 
 // Mock the debug utility if it's used directly in the component for isDebug=true
 // jest.mock('../tests/utils/testGenUtils', () => ({
 //   ...jest.requireActual('../tests/utils/testGenUtils'),
-//   getDebugBgClass: jest.fn().mockReturnValue('bg-gray-300'), // Mock return value
+//   getDebugBgClass: jest.fn().mockReturnValue('bg-gray-300'), 
 // }));
 
 // Test suite for the ${pascalComponentName} layout frame
 describe('${pascalComponentName} Layout Frame', () => {
-  const testId = '${getNameFromTokenKey(frameKey)}'; // Use kebab-case name
+  const testId = '${testId}'; 
 
   // Test case for isDebug = true (Layout Verification Mode)
   it('should render correctly with debug styles when isDebug is true', () => {
-    // Render the parent component passing isDebug={true}
-    // We assume the target frame is identifiable within HandsOnDesign via testId
-    render(<HandsOnDesign isDebug={true} />); 
+    render(<${rootComponentName} isDebug={true} />); 
     const layoutElement = screen.getByTestId(testId);
 
     // Verify CORE layout Tailwind classes (excluding background)
@@ -72,8 +74,7 @@ describe('${pascalComponentName} Layout Frame', () => {
 
   // Test case for isDebug = false (Production/Final Styling Mode)
   it('should render correctly with final styles when isDebug is false or not provided', () => {
-    // Render the parent component without isDebug or isDebug={false}
-    render(<HandsOnDesign />); 
+    render(<${rootComponentName} />); 
     const layoutElement = screen.getByTestId(testId);
 
     // Verify CORE layout Tailwind classes (excluding background)
@@ -91,8 +92,7 @@ describe('${pascalComponentName} Layout Frame', () => {
     return testCode;
 
   } catch (error) {
-    console.error(`Error generating test code for ${frameKey}:`, error);
-    throw error; // Re-throw the error to indicate failure
+    throw error; 
   }
 }
 
@@ -104,16 +104,13 @@ if (require.main === module) {
     const designTokensRaw = fs.readFileSync(tokensPath, 'utf8');
     const designTokens = JSON.parse(designTokensRaw);
 
-    // Find the root frame key (assuming it has no '/')
     const rootFrameKey = Object.keys(designTokens).find(key => !key.includes('/'));
     if (!rootFrameKey) {
       throw new Error('Could not find the root frame key in the design tokens.');
     }
 
-    // Find all direct child frames (keys with exactly one '/')
     const layoutFrameKeys = Object.keys(designTokens).filter(key => {
         const parts = key.split('/');
-        // Check if it starts with the root key and has exactly one '/' separator
         return key.startsWith(rootFrameKey + '/') && parts.length === 2;
     });
 
@@ -126,16 +123,15 @@ if (require.main === module) {
 
     layoutFrameKeys.forEach(frameKey => {
         try {
-            const kebabName = getNameFromTokenKey(frameKey); // Gets the part after the last '/'
+            const kebabName = getNameFromTokenKey(frameKey); 
             const outputFileName = `${kebabName}.test.js`;
-            const outputPath = path.join(__dirname, '..', outputFileName); // Output to src/tests/
+            const outputPath = path.join(__dirname, '..', outputFileName); 
 
-            const generatedCode = genLayoutFrameTest(tokensPath, frameKey);
+            const generatedCode = genLayoutFrameTest(tokensPath, frameKey, 'HandsOnDesign', '../components/HandsOnDesign'); 
             fs.writeFileSync(outputPath, generatedCode);
             console.log(`Layout frame test file generated successfully for ${frameKey}: ${outputPath}`);
         } catch (generationError) {
             console.error(`Failed to generate test file for ${frameKey}: ${generationError.message}`);
-            // Continue to the next key even if one fails
         }
     });
 
