@@ -13,7 +13,7 @@ describe('HandsOnDesign Component', () => {
     expect(rootElement).toBeInTheDocument();
 
     // Verify Tailwind classes using arbitrary values
-    expect(rootElement).toHaveClass('flex', 'flex-col', 'justify-between', 'items-center', 'gap-[10px]', 'pt-[10px]', 'pb-[10px]', 'pl-[10px]', 'pr-[10px]', 'w-[393px]', 'h-[808px]', 'overflow-hidden', 'bg-[#3ade63]');
+    expect(rootElement).toHaveClass('flex', 'flex-col', 'justify-between', 'items-center', 'gap-[10px]', 'pt-[10px]', 'pb-[10px]', 'pl-[10px]', 'pr-[10px]', 'w-screen', 'h-screen', 'overflow-hidden', 'bg-[#3ade63]');
 
     // Optionally, add tests for children structure or specific attributes if needed
   });
