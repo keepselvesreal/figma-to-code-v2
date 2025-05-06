@@ -1,35 +1,35 @@
 // src/components/HandsOnDesign.tsx
 import React from 'react';
-// Import the debug utility only needed when isDebug is true
+// 디버그 유틸리티는 isDebug가 true일 때만 필요합니다
 import { getDebugBgClass } from '../tests/utils/testGenUtils';
 
 interface Props {
   children?: React.ReactNode;
-  isDebug?: boolean; // Add isDebug prop
+  isDebug?: boolean; // isDebug 속성 추가
 }
 
 // RGB(58, 222, 99) -> #3ADE63
 const HandsOnDesign: React.FC<Props> = ({ children, isDebug = false }) => {
-  // Define frame names for clarity
+  // 프레임 이름을 명확하게 정의
   const navName = 'Nav';
   const heroName = 'Hero';
   const mainName = 'Main';
   const footerName = 'Footer';
 
-  // Define actual background classes based on design tokens
-  const navActualBg = 'bg-[#ffe100]'; // From Nav token backgroundColor
-  const heroActualBg = 'bg-[#ff00f6]'; // From Hero token backgroundColor
-  const mainActualBg = 'bg-transparent'; // Main has transparent background in tokens
-  const footerActualBg = 'bg-transparent'; // Footer has transparent background in tokens
+  // 디자인 토큰에 기반한 실제 배경 클래스 정의
+  const navActualBg = 'bg-[#ffe100]'; // Nav 토큰 backgroundColor에서 가져옴
+  const heroActualBg = 'bg-[#ff00f6]'; // Hero 토큰 backgroundColor에서 가져옴
+  const mainActualBg = 'bg-transparent'; // 메인은 토큰에서 투명 배경
+  const footerActualBg = 'bg-transparent'; // 푸터는 토큰에서 투명 배경
 
   return (
     <div
       className="flex flex-col justify-between items-center gap-[10px] pt-[10px] pb-[10px] pl-[10px] pr-[10px] w-screen h-screen overflow-hidden bg-[#3ade63]"
       data-testid="hands-on-design"
     >
-      {/* Nav layout frame */}
+      {/* 네비게이션 레이아웃 프레임 */}
       <div
-        // Conditionally apply background and keep core layout classes
+        // 조건부로 배경을 적용하고 핵심 레이아웃 클래스 유지
         className={`flex flex-col justify-center items-center gap-[10px] pt-[25px] pb-[25px] pl-[25px] pr-[25px] w-full h-[166px] overflow-hidden ${isDebug ? getDebugBgClass(navName) : navActualBg}`}
         data-testid={navName}
       >
@@ -48,34 +48,34 @@ const HandsOnDesign: React.FC<Props> = ({ children, isDebug = false }) => {
         )}
       </div>
 
-      {/* Hero layout frame */}
+      {/* 히어로 레이아웃 프레임 */}
       <div
-        // Conditionally apply background and keep core layout classes
+        // 조건부로 배경을 적용하고 핵심 레이아웃 클래스 유지
         className={`flex flex-row justify-center items-center gap-[10px] pt-[30px] pb-[30px] pl-[30px] pr-[30px] w-full h-[242px] ${isDebug ? getDebugBgClass(heroName) : heroActualBg}`}
         data-testid={heroName}
       >
-         {isDebug && heroName} {/* Conditionally render name */}
+        {isDebug && heroName} {/* 조건부로 이름 렌더링 */}
       </div>
 
-      {/* Main layout frame */}
+      {/* 메인 레이아웃 프레임 */}
       <div
-        // Conditionally apply background and keep core layout classes
+        // 조건부로 배경을 적용하고 핵심 레이아웃 클래스 유지
         className={`flex flex-row items-center gap-[10px] w-[164px] h-[182px] ${isDebug ? getDebugBgClass(mainName) : mainActualBg}`}
         data-testid={mainName}
       >
-        {isDebug && mainName} {/* Conditionally render name */}
+        {isDebug && mainName} {/* 조건부로 이름 렌더링 */}
       </div>
 
-      {/* Footer layout frame */}
+      {/* 푸터 레이아웃 프레임 */}
       <div
-        // Conditionally apply background and keep core layout classes
-        className={`flex flex-row items-center gap-[10px] w-[164px] h-[182px] ${isDebug ? getDebugBgClass(footerName) : footerActualBg}`}
+        // 조건부로 배경을 적용하고 핵심 레이아웃 클래스 유지
+        className={`flex flex-row items-center gap-[10px] w-[164px] h-[182 cName) : footerActualBg}`}
         data-testid={footerName}
       >
-         {isDebug && footerName} {/* Conditionally render name */}
+        {isDebug && footerName} {/* 조건부로 이름 렌더링 */}
       </div>
 
-      {/* Child components will go here */}
+      {/* 자식 컴포넌트가 여기 들어갈 것입니다 */}
       {children}
     </div>
   );

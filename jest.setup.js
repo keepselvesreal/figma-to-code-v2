@@ -1,4 +1,4 @@
 // jest.setup.js
 import '@testing-library/jest-dom';
 
-// Add any global setup needed for your tests here
+// 테스트에 필요한 전역 설정을 여기에 추가하세요

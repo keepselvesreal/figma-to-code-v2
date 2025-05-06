@@ -2,16 +2,16 @@
 const nextJest = require('next/jest');
 
 const createJestConfig = nextJest({
-  // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
+  // Next.js 앱의 경로를 제공하여 테스트 환경에서 next.config.js 및 .env 파일을 로드합니다.
   dir: './',
 });
 
-// Add any custom config to be passed to Jest
+// Jest에 전달할 사용자 지정 구성 추가
 const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: {
-    // Handle module aliases (if you have them in your Next.js config)
+    // Next.js 구성에 모듈 별칭이 있는 경우 처리합니다.
     '^@/components/(.*)$': '<rootDir>/src/components/$1',
     '^@/app/(.*)$': '<rootDir>/src/app/$1',
     '^@/utils/(.*)$': '<rootDir>/src/utils/$1',
@@ -19,5 +19,5 @@ const customJestConfig = {
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
 };
 
-// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
+// createJestConfig는 next/jest가 비동기적으로 Next.js 구성 파일을 로드할 수 있도록 이 방식으로 내보내집니다.
 module.exports = createJestConfig(customJestConfig);
