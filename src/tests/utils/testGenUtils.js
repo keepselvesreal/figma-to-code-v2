@@ -48,7 +48,7 @@ function kebabToPascalCase(str) {
  * @param {Object} options - Optional configuration flags.
  * @param {boolean} [options.isRoot=false] - Whether to apply root-specific styles (e.g., w-screen).
  * @param {boolean} [options.includeBackground=true] - Whether to include the background class.
- * @returns {Object} - An object containing the list of Tailwind classes.
+ * @returns {Object} - An object containing the list of Tailwind classes and the actual background class.
  */
 function extractStylesFromTokens(frameData, options = {}) {
     // Default options
@@ -80,6 +80,9 @@ function extractStylesFromTokens(frameData, options = {}) {
     const clipsContent = visuals.clipsContent ?? false;
     const width = boundingBox.width;
     const height = boundingBox.height;
+
+    // --- Calculate actual background class from tokens ---
+    const actualBgClass = getBgClass(backgroundColor);
 
     // Map Figma layout props to Tailwind classes
     const flexOrDisplay = layoutMode ? 'flex' : '';
@@ -126,9 +129,10 @@ function extractStylesFromTokens(frameData, options = {}) {
       heightClass = `h-[${height}px]`;
     } // 'HUG' doesn't add a specific height class
 
-    const bgClass = includeBackground ? getBgClass(backgroundColor) : '';
+    // Include background class in main list ONLY if the option is true
+    const bgClass = includeBackground ? actualBgClass : '';
 
-    // Combine all classes
+    // Combine all classes for the main list
     let classList = [
         flexOrDisplay, flexDir,
         justifyContent, alignItems,
@@ -147,8 +151,8 @@ function extractStylesFromTokens(frameData, options = {}) {
     // Filter out empty strings
     classList = classList.filter(Boolean);
 
-    // Return only the classes; component name should be handled separately
-    return { classList };
+    // Return classes and the actual background class separately
+    return { classList, actualBgClass };
 }
 
 /**
