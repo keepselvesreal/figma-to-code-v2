@@ -1,7 +1,7 @@
 // src/tests/utils/testGenUtils.js
 
 // Helper function to convert Figma RGB (0-1) to CSS hex or rgb string
-function figmaColorToCss(color) {
+export function figmaColorToCss(color) {
   if (!color) return 'transparent'; // Handle missing color
   const r = Math.round(color.r * 255);
   const g = Math.round(color.g * 255);
@@ -23,7 +23,7 @@ function figmaColorToCss(color) {
  * @param {Object} color - The color object from Figma node properties.
  * @returns {string} - The Tailwind background class string (e.g., 'bg-[#RRGGBB]' or 'bg-transparent').
  */
-function getBgClass(color) {
+export function getBgClass(color) {
     if (!color) {
         return 'bg-transparent'; // Default to transparent if no color
     }
@@ -36,7 +36,7 @@ function getBgClass(color) {
 }
 
 // Helper function to convert kebab-case to PascalCase
-function kebabToPascalCase(str) {
+export function kebabToPascalCase(str) {
   if (!str) return '';
   return str.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
 }
@@ -50,7 +50,7 @@ function kebabToPascalCase(str) {
  * @param {boolean} [options.includeBackground=true] - Whether to include the background class.
  * @returns {Object} - An object containing the list of Tailwind classes and the actual background class.
  */
-function extractStylesFromTokens(frameData, options = {}) {
+export function extractStylesFromTokens(frameData, options = {}) {
     // Default options
     const { isRoot = false, includeBackground = true } = options;
 
@@ -161,7 +161,7 @@ function extractStylesFromTokens(frameData, options = {}) {
  * @param {string} frameName - The name of the layout frame (e.g., 'Nav', 'Hero').
  * @returns {string} - A Tailwind background color class (e.g., 'bg-red-200').
  */
-function getDebugBgClass(frameName) {
+export function getDebugBgClass(frameName) {
   // Simple mapping for known frames. Add more as needed.
   const name = frameName.toLowerCase();
   switch (name) {
@@ -179,10 +179,15 @@ function getDebugBgClass(frameName) {
   }
 }
 
-module.exports = {
-  figmaColorToCss,
-  getBgClass,
-  kebabToPascalCase,
-  extractStylesFromTokens,
-  getDebugBgClass
-};
+export function convertRgbToHex(r, g, b) {
+  const toHex = (c) => {
+    const num = Math.round(c * 255);
+    const hex = num.toString(16).toUpperCase();
+    return hex.length === 1 ? '0' + hex : hex;
+  };
+  return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+}
+
+export function getElementByTestId(parentElement, testId) {
+  return within(parentElement).getByTestId(testId);
+}

@@ -33,7 +33,19 @@ const HandsOnDesign: React.FC<Props> = ({ children, isDebug = false }) => {
         className={`flex flex-col justify-center items-center gap-[10px] pt-[25px] pb-[25px] pl-[25px] pr-[25px] w-full h-[166px] overflow-hidden ${isDebug ? getDebugBgClass(navName) : navActualBg}`}
         data-testid={navName}
       >
-        {isDebug && navName} {/* Conditionally render name */}
+        {isDebug ? (
+          navName
+        ) : (
+          <>
+            <div
+              data-testid="profile-img"
+              className="bg-[#009DFF] w-[63px] h-[76px] rounded-full"
+            ></div>
+            <p data-testid="user-name" className="text-[#000000]">
+              User Name
+            </p>
+          </>
+        )}
       </div>
 
       {/* Hero layout frame */}
